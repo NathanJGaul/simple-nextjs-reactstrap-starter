@@ -1,15 +1,15 @@
 import React from 'react';
 import App, { Container } from 'next/app';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import Head from 'next/head';
 
 import 'bootstrap/dist/css/bootstrap-reboot.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import TitleBar from '../components/TitleBar';
+
 const Layout = ({ children }) => (
   <>
-    <Navbar color="dark" dark>
-      <NavbarBrand href="">notes</NavbarBrand>
-    </Navbar>
+    <TitleBar />
     {children}
   </>
 );
@@ -18,11 +18,21 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Container>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </Container>
+      <>
+        <Head>
+          <title>notes</title>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </Head>
+        <Container>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Container>
+      </>
     );
   }
 }
